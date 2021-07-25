@@ -9,5 +9,7 @@
 int _putchar(char c);
 int _strlen(const char *s);
 int _printf(const char *format, ...);
+void print_number(int n);
+int ndigits(int n);
 
 #endif /* HOLBERTON_H */

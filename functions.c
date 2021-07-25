@@ -22,7 +22,58 @@ int _putchar(char c)
 int _strlen(const char *s)
 {
 	int i = 0;
+
 	while (s[i] != '\0')
 		i++;
 	return (i);
+}
+
+/**
+ * print_number - prints any numbre without using printf
+ * @n: number to print
+ * Return: void
+ */
+
+void print_number(int n)
+{
+unsigned int num;
+
+	if (n < 0)
+	{
+		_putchar('-');
+		num = -n;
+	}
+	else
+	{
+		num = n;
+	}
+	if (num / 10)
+	{
+		print_number(num / 10);
+	}
+	_putchar(num % 10 + '0');
+}
+
+/**
+ * ndigits - returns the number of digits of n
+ * @n: number
+ *
+ * Return: dg
+ */
+
+int ndigits(int n)
+{
+	int dg = 1;
+
+	if (n < 0)
+	{
+		dg++;
+		n = -n;
+	}
+	while (n / 10 > 0)
+	{
+		n /= 10;
+		dg++;
+	}
+	return (dg);
 }

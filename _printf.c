@@ -34,6 +34,16 @@ int _printf(const char *format, ...)
 					sf = "%";
 					write(1, sf, _strlen(sf));
 					len++;
+				case 'd':
+					n = va_arg(ap, int);
+					print_number(n);
+					len += ndigits(n);
+					break;
+				case 'i':
+					n = va_arg(ap, int);
+					print_number(n);
+					len += ndigits(n);
+					break;
 				default:
 					break;
 			}
