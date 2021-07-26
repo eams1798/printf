@@ -9,7 +9,7 @@
 int _printf(const char *format, ...)
 {
 	va_list ap;
-	int i, len = 0;
+	int i, n, len = 0;
 	char *sf;
 
 	va_start(ap, format);
@@ -34,6 +34,7 @@ int _printf(const char *format, ...)
 					sf = "%";
 					write(1, sf, _strlen(sf));
 					len++;
+					break;
 				case 'd':
 					n = va_arg(ap, int);
 					print_number(n);
