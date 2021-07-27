@@ -95,9 +95,11 @@ int _printf(const char *format, ...)
 								_putchar('0');
 							write(1, str, _strlen(str));
 							n++;
+							len += 2;
 						}
 						_putchar(*(sf + n));
 					}
+					len += _strlen(sf);
 					break;
 				default:
 					_putchar('%');
