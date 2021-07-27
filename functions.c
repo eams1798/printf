@@ -77,3 +77,27 @@ int ndigits(int n)
 	}
 	return (dg);
 }
+
+/**
+ * convert - converts a number to any base
+ * @num: number to convert
+ * @base: base to convert to
+ *
+ * Return: ptr, number converted
+ */
+
+char *convert(unsigned int num, int base)
+{
+	static const char n[] = "0123456789ABCDEF";
+	static char buffer[50];
+	char *ptr;
+
+	ptr = &buffer[49];
+	*ptr = '\0';
+
+	do {
+		*--ptr = n[num % base];
+		num /= base;
+	} while (num != 0);
+	return (ptr);
+}

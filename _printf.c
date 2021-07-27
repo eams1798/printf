@@ -10,6 +10,7 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	int i, n, len = 0;
+	unsigned int u;
 	char *sf;
 
 	va_start(ap, format);
@@ -44,6 +45,42 @@ int _printf(const char *format, ...)
 					n = va_arg(ap, int);
 					print_number(n);
 					len += ndigits(n);
+					break;
+				case 'b':
+					u = va_arg(ap, unsigned int);
+					sf = convert(u, 2);
+					write(1, sf, _strlen(sf));
+					len += _strlen(sf);
+					break;
+				case 'o':
+					u = va_arg(ap, unsigned int);
+					sf = convert(u, 8);
+					write(1, sf, _strlen(sf));
+					len += _strlen(sf);
+					break;
+				case 'X':
+					u = va_arg(ap, unsigned int);
+					sf = convert(u, 16);
+					write(1, sf, _strlen(sf));
+					len += _strlen(sf);
+					break;
+				case 'x':
+					u = va_arg(ap, unsigned int);
+					sf = convert(u, 16);
+					for (n = 0; n < _strlen(sf); n++)
+					{
+						if (*(sf + n) >= 'A' && *(sf + n) <= 'Z')
+						{
+							*(sf + n) = *(sf + n) + 32;
+						}
+					}
+					write(1, sf, _strlen(sf));
+					len += _strlen(sf);
+					break;
+				case 'u':
+					u = va_arg(ap, unsigned int);
+					print_unumber(u);
+					len += nudigits(u);
 					break;
 				default:
 					break;
