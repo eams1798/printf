@@ -86,7 +86,7 @@ int ndigits(int n)
  * Return: ptr, number converted
  */
 
-char *convert(unsigned int num, int base)
+char *convert(long unsigned int num, int base)
 {
 	static const char n[] = "0123456789ABCDEF";
 	static char buffer[50];

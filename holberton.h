@@ -14,6 +14,6 @@ void print_number(int n);
 int ndigits(int n);
 void print_unumber(unsigned int n);
 int nudigits(unsigned int n);
-char *convert(unsigned int num, int base);
+char *convert(long unsigned int num, int base);
 
 #endif /* HOLBERTON_H */

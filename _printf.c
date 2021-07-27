@@ -10,8 +10,9 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	int i, n, len = 0;
-	unsigned int u;
+	long unsigned int u;
 	char *sf, *str;
+	void *ptr;
 
 	va_start(ap, format);
 
@@ -100,6 +101,30 @@ int _printf(const char *format, ...)
 						_putchar(*(sf + n));
 					}
 					len += _strlen(sf);
+					break;
+				case 'p':
+					ptr = va_arg(ap, void *);
+					if (ptr == NULL)
+					{
+						write(1, "(nil)", 5);
+						len += 5;
+					}
+					else
+					{
+						u = (long unsigned int)ptr;
+						str = "0x";
+						sf = convert(u, 16);
+						for (n = 0; n < _strlen(sf); n++)
+						{
+							if (*(sf + n) >= 'A' && *(sf + n) <= 'Z')
+							{
+								*(sf + n) = *(sf + n) + 32;
+							}
+						}
+						write(1, str, 2);
+						write(1, sf, _strlen(sf));
+						len += (2 + _strlen(sf));
+					}
 					break;
 				default:
 					_putchar('%');
