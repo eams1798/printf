@@ -93,7 +93,7 @@ int _printf(const char *format, ...)
 							_putchar('x');
 							if (_strlen(str) < 2)
 								_putchar('0');
-							write(1, str, 2);
+							write(1, str, _strlen(str));
 							n++;
 						}
 						_putchar(*(sf + n));
