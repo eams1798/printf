@@ -1,0 +1,77 @@
+.\" Manpage for _printf.
+.TH man 3 "26 Jul 2021" "1.0" "_printf man page"
+.SH NAME
+_printf \- writes a string with some specified formats 
+.SH SYNOPSIS
+int _printf(const char *format, ...);
+.SH DESCRIPTION
+_printf writes a string with all given formats in the stdout, the standard output stream.
+The function also returns the number of characters printed (except the null byte at to end of to string).
+.SH OPTIONS
+The formats of the _printf function are located in its first argument, in the given string. The syntax of the formats is a '%', followed by one of the next characters:
+.TP
+.B
+c
+prints a character.
+
+.TP
+.B
+s
+prints a new string.
+
+.TP
+.B
+%
+literally prints a percent.
+
+.TP
+.B
+d, i
+prints a integer.
+
+.TP
+.B
+b
+converts an unsigned integer to binary system, and prints it.
+
+.TP
+.B
+u
+prints an unsigned integer in decimal system.
+
+
+.TP
+.B
+o
+converts an unsigned integer to octal system, and prints it.
+
+.TP
+.B
+x, X
+converts an unsigned integer to hexadecimal system, and prints it. In hexadecimal system the letters A-F are used to represent numbers from 10 to 15. The character 'x' prints this letters in lowercase and the letter 'X', in uppercase.
+
+.TP
+.B
+S
+prints a string, and the non-printable characters are printed as "\x", followed by their ASCII code value in hexadecimal.
+
+.TP
+.B
+p
+prints the address of a memory space allocated by a pointer.
+
+.TP
+.B
+r
+prints a string in reverse.
+
+.TP
+Each new format located in the string to be printed indicate a new argument to print with the specified format.
+.SH SEE ALSO
+printf(3) 
+.SH EXAMPLES
+coming soon...
+.SH AUTHOR
+Estefano Misme (3401@holbertonschool.com)
+.TP
+Karla Diaz (@holbertonschool.com)
