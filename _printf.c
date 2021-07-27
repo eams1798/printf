@@ -11,7 +11,7 @@ int _printf(const char *format, ...)
 	va_list ap;
 	int i, n, len = 0;
 	unsigned int u;
-	char *sf;
+	char *sf, *str;
 
 	va_start(ap, format);
 
@@ -82,7 +82,26 @@ int _printf(const char *format, ...)
 					print_unumber(u);
 					len += nudigits(u);
 					break;
+				case 'S':
+					sf = va_arg(ap, char *);
+					for (n = 0; n < _strlen(sf); n++)
+					{
+						if ((*(sf + n) > 0 && *(sf + n) < 32) || (*(sf + n) >= 127))
+						{
+							str = convert(*(sf + n), 16);
+							_putchar('\\');
+							_putchar('x');
+							if (_strlen(str) < 2)
+								_putchar('0');
+							write(1, str, 2);
+							n++;
+						}
+						_putchar(*(sf + n));
+					}
+					break;
 				default:
+					_putchar('%');
+					_putchar(format[i + 1]);
 					break;
 			}
 			i += 1;
