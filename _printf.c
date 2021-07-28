@@ -94,24 +94,29 @@ int _printf(const char *format, ...)
 					break;
 				case 'S':
 					sf = va_arg(ap, char *);
-					if (sf)
+					if (sf == NULL)
 					{
-					for (n = 0; n < _strlen(sf); n++)
-					{
-						if ((*(sf + n) > 0 && *(sf + n) < 32) || (*(sf + n) >= 127))
-						{
-							str = convert(*(sf + n), 16);
-							_putchar('\\');
-							_putchar('x');
-							if (_strlen(str) < 2)
-								_putchar('0');
-							write(1, str, _strlen(str));
-							n++;
-							len += 2;
-						}
-						_putchar(*(sf + n));
+						write(1, "(null)", 6);
+						len += 6;
 					}
-					len += _strlen(sf);
+					else
+					{
+						for (n = 0; n < _strlen(sf); n++)
+						{
+							if ((*(sf + n) > 0 && *(sf + n) < 32) || (*(sf + n) >= 127))
+							{
+								str = convert(*(sf + n), 16);
+								_putchar('\\');
+								_putchar('x');
+								if (_strlen(str) < 2)
+									_putchar('0');
+								write(1, str, _strlen(str));
+								n++;
+								len += 2;
+							}
+						_putchar(*(sf + n));
+						}
+						len += _strlen(sf);
 					}
 					break;
 				case 'p':
