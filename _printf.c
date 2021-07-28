@@ -30,8 +30,16 @@ int _printf(const char *format, ...)
 					break;
 				case 's':
 					sf = va_arg(ap, char *);
-					write(1, sf, _strlen(sf));
-					len += _strlen(sf);
+					if (sf == NULL)
+					{
+						write(1, "(null)", 6);
+						len += 6;
+					}
+					else
+					{
+						write(1, sf, _strlen(sf));
+						len += _strlen(sf);
+					}
 					break;
 				case '%':
 					sf = "%";
