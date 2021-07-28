@@ -10,7 +10,7 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	int i, n, len = 0;
-	long unsigned int u;
+	unsigned long int u;
 	char *sf, *str;
 	void *ptr;
 
@@ -111,7 +111,7 @@ int _printf(const char *format, ...)
 					}
 					else
 					{
-						u = (long unsigned int)ptr;
+						u = (unsigned long int)ptr;
 						str = "0x";
 						sf = convert(u, 16);
 						for (n = 0; n < _strlen(sf); n++)
@@ -125,6 +125,20 @@ int _printf(const char *format, ...)
 						write(1, sf, _strlen(sf));
 						len += (2 + _strlen(sf));
 					}
+					break;
+				case 'r':
+					sf = va_arg(ap, char *);
+					str = reverse(sf);
+					write(1, str, _strlen(str));
+					len += _strlen(str);
+					free(str);
+					break;
+				case 'R':
+					sf = va_arg(ap, char *);
+					str = ROT13(sf);
+					write(1, str, _strlen(str));
+					len += _strlen(str);
+					free(str);
 					break;
 				default:
 					_putchar('%');
