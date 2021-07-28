@@ -85,6 +85,8 @@ int _printf(const char *format, ...)
 					break;
 				case 'S':
 					sf = va_arg(ap, char *);
+					if (sf)
+					{
 					for (n = 0; n < _strlen(sf); n++)
 					{
 						if ((*(sf + n) > 0 && *(sf + n) < 32) || (*(sf + n) >= 127))
@@ -101,6 +103,7 @@ int _printf(const char *format, ...)
 						_putchar(*(sf + n));
 					}
 					len += _strlen(sf);
+					}
 					break;
 				case 'p':
 					ptr = va_arg(ap, void *);
