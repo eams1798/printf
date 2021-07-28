@@ -14,8 +14,9 @@ int _printf(const char *format, ...)
 	char *sf, *str;
 	void *ptr;
 
+	if (format == NULL)
+		return (-1);
 	va_start(ap, format);
-
 	for (i = 0; i < _strlen(format); i++)
 	{
 		if (format[i] == '%')
@@ -146,6 +147,7 @@ int _printf(const char *format, ...)
 				default:
 					_putchar('%');
 					_putchar(format[i + 1]);
+					len += 2;
 					break;
 			}
 			i += 1;
