@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 				case 'c':
 					sf = va_arg(ap, char *);
 					write(1, &sf, 1);
-					len++;
+						len++;
 					break;
 				case 's':
 					sf = va_arg(ap, char *);
@@ -140,17 +140,33 @@ int _printf(const char *format, ...)
 					break;
 				case 'r':
 					sf = va_arg(ap, char *);
-					str = reverse(sf);
-					write(1, str, _strlen(str));
-					len += _strlen(str);
-					free(str);
+					if (sf == NULL)
+					{
+						write(1, "(nil)", 5);
+						len += 5;
+					}
+					else
+					{
+						str = reverse(sf);
+						write(1, str, _strlen(str));
+						len += _strlen(str);
+						free(str);
+					}
 					break;
 				case 'R':
 					sf = va_arg(ap, char *);
-					str = ROT13(sf);
-					write(1, str, _strlen(str));
-					len += _strlen(str);
-					free(str);
+					if (sf == NULL)
+					{
+						write(1, "(nil)", 5);
+						len += 5;
+					}
+					else
+					{
+						str = ROT13(sf);
+						write(1, str, _strlen(str));
+						len += _strlen(str);
+						free(str);
+					}
 					break;
 				default:
 					_putchar('%');
