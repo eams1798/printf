@@ -3,10 +3,13 @@
 .SH NAME
 _printf \- writes a string with some specified formats 
 .SH SYNOPSIS
+#include "holberton.h"
+
 int _printf(const char *format, ...);
 .SH DESCRIPTION
 _printf writes a string with all given formats in the stdout, the standard output stream.
-The function also returns the number of characters printed (except the null byte at the end of the string).
+.SH RETURN
+The function returns the number of characters printed (except the null byte at the end of the string).
 .SH OPTIONS
 The formats of the _printf function are located in its first argument, in the given string. The syntax of the formats is a '%', followed by one of the next characters:
 .TP
@@ -71,15 +74,15 @@ Each new format located in the string to be printed indicate a new argument to p
 printf(3) 
 .SH EXAMPLES
 To print a string:
-_printf("Let's try to printf a simple sentence.\n");
+_printf("Let's try to printf a simple sentence.");
 
 To print a number, in this case, someone's age:
-_printf("He is %d years old\n", 25);
+_printf("He is %d years old", 25);
 
 To convert a number:
-_printf("%d in binary is %b, in octal is %o and in hexadecimal is %X\n", 27, 27, 27, 27);
+_printf("%d in binary is %b, in octal is %o and in hexadecimal is %X", 27, 27, 27, 27);
 
 .SH AUTHOR
 Estefano Misme (3401@holbertonschool.com)
 .TP
-Karla Diaz (@holbertonschool.com)
+Karla Diaz (3353@holbertonschool.com)
