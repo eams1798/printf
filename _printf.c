@@ -10,12 +10,13 @@ int _printf(const char *format, ...)
 {
 	va_list ap;
 	int i, n, len = 0;
-	long unsigned int u;
+	unsigned long int u;
 	char *sf, *str;
 	void *ptr;
 
+	if (format == NULL)
+		return (-1);
 	va_start(ap, format);
-
 	for (i = 0; i < _strlen(format); i++)
 	{
 		if (format[i] == '%')
@@ -25,12 +26,20 @@ int _printf(const char *format, ...)
 				case 'c':
 					sf = va_arg(ap, char *);
 					write(1, &sf, 1);
-					len++;
+						len++;
 					break;
 				case 's':
 					sf = va_arg(ap, char *);
-					write(1, sf, _strlen(sf));
-					len += _strlen(sf);
+					if (sf == NULL)
+					{
+						write(1, "(null)", 6);
+						len += 6;
+					}
+					else
+					{
+						write(1, sf, _strlen(sf));
+						len += _strlen(sf);
+					}
 					break;
 				case '%':
 					sf = "%";
@@ -85,24 +94,29 @@ int _printf(const char *format, ...)
 					break;
 				case 'S':
 					sf = va_arg(ap, char *);
-					if (sf)
+					if (sf == NULL)
 					{
-					for (n = 0; n < _strlen(sf); n++)
-					{
-						if ((*(sf + n) > 0 && *(sf + n) < 32) || (*(sf + n) >= 127))
-						{
-							str = convert(*(sf + n), 16);
-							_putchar('\\');
-							_putchar('x');
-							if (_strlen(str) < 2)
-								_putchar('0');
-							write(1, str, _strlen(str));
-							n++;
-							len += 2;
-						}
-						_putchar(*(sf + n));
+						write(1, "(null)", 6);
+						len += 6;
 					}
-					len += _strlen(sf);
+					else
+					{
+						for (n = 0; n < _strlen(sf); n++)
+						{
+							if ((*(sf + n) > 0 && *(sf + n) < 32) || (*(sf + n) >= 127))
+							{
+								str = convert(*(sf + n), 16);
+								_putchar('\\');
+								_putchar('x');
+								if (_strlen(str) < 2)
+									_putchar('0');
+								write(1, str, _strlen(str));
+								n++;
+								len += 2;
+							}
+						_putchar(*(sf + n));
+						}
+						len += _strlen(sf);
 					}
 					break;
 				case 'p':
@@ -114,7 +128,7 @@ int _printf(const char *format, ...)
 					}
 					else
 					{
-						u = (long unsigned int)ptr;
+						u = (unsigned long int)ptr;
 						str = "0x";
 						sf = convert(u, 16);
 						for (n = 0; n < _strlen(sf); n++)
@@ -129,9 +143,40 @@ int _printf(const char *format, ...)
 						len += (2 + _strlen(sf));
 					}
 					break;
+				case 'r':
+					sf = va_arg(ap, char *);
+					if (sf == NULL)
+					{
+						write(1, "(nil)", 5);
+						len += 5;
+					}
+					else
+					{
+						str = reverse(sf);
+						write(1, str, _strlen(str));
+						len += _strlen(str);
+						free(str);
+					}
+					break;
+				case 'R':
+					sf = va_arg(ap, char *);
+					if (sf == NULL)
+					{
+						write(1, "(nil)", 5);
+						len += 5;
+					}
+					else
+					{
+						str = ROT13(sf);
+						write(1, str, _strlen(str));
+						len += _strlen(str);
+						free(str);
+					}
+					break;
 				default:
 					_putchar('%');
 					_putchar(format[i + 1]);
+					len += 2;
 					break;
 			}
 			i += 1;
