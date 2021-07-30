@@ -64,15 +64,20 @@ unsigned int num;
 int ndigits(int n)
 {
 	int dg = 1;
+	unsigned int uns;
 
 	if (n < 0)
 	{
 		dg++;
-		n = -n;
+		uns = n * (-1);
 	}
-	while (n / 10 > 0)
+	else
 	{
-		n /= 10;
+		uns = n;
+	}
+	while (uns / 10 > 0)
+	{
+		uns /= 10;
 		dg++;
 	}
 	return (dg);
@@ -86,7 +91,7 @@ int ndigits(int n)
  * Return: ptr, number converted
  */
 
-char *convert(long unsigned int num, int base)
+char *convert(unsigned long int num, int base)
 {
 	static const char n[] = "0123456789ABCDEF";
 	static char buffer[50];
