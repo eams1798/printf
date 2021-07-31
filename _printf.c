@@ -172,7 +172,7 @@ int _printf(const char *format, ...)
 						free(str);
 					}
 					break;
-				defaulti:
+				default:
 					if (format[i + 1] == '\0')
 						return (-1);
 					_putchar('%');
