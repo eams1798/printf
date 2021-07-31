@@ -111,8 +111,7 @@ int _printf(const char *format, ...)
 								if (_strlen(str) < 2)
 									_putchar('0');
 								write(1, str, _strlen(str));
-								n++;
-								len += 2;
+								len += 3;
 							}
 						_putchar(*(sf + n));
 						}
@@ -173,7 +172,9 @@ int _printf(const char *format, ...)
 						free(str);
 					}
 					break;
-				default:
+				defaulti:
+					if (format[i + 1] == '\0')
+						return (-1);
 					_putchar('%');
 					_putchar(format[i + 1]);
 					len += 2;
